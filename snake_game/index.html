@@ -25,9 +25,10 @@
 
         #gameContainer {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 30px;
+            justify-content: center;
         }
 
         #gameCanvas {
@@ -35,10 +36,23 @@
             background-color: #000;
         }
 
-        #gameInfo {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        #gameArea {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #rightPanel {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
+            min-width: 250px;
+        }
+
+        #gameInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             text-align: center;
             font-size: 18px;
         }
@@ -64,8 +78,8 @@
 
         #controls {
             text-align: center;
-            margin-top: 20px;
             color: #888;
+            margin-top: 10px;
         }
 
         #controls h3 {
@@ -137,60 +151,88 @@
         #canvasContainer {
             position: relative;
         }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 1200px) {
+            #gameContainer {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #rightPanel {
+                min-width: auto;
+                width: 100%;
+                max-width: 800px;
+            }
+            
+            #gameInfo {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .info-item {
+                min-width: 120px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>ByteSnake</h1>
     
     <div id="gameContainer">
-        <div id="canvasContainer">
-            <canvas id="gameCanvas" width="800" height="600"></canvas>
-            
-            <div id="pauseOverlay">
-                <h2>⏸️ PAUSED</h2>
-                <p>Press P to Resume</p>
-            </div>
-            
-            <div id="gameOverOverlay">
-                <h2>💀 GAME OVER</h2>
-                <p id="finalScore">Score: 0</p>
-                <button class="overlay-button" onclick="restartGame()">🔄 Restart (R)</button>
-                <button class="overlay-button secondary" onclick="quitGame()">❌ Quit (Q)</button>
-            </div>
-        </div>
-        
-        <div id="gameInfo">
-            <div class="info-item">
-                <div class="info-label">Score</div>
-                <div class="info-value" id="score">0</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Speed</div>
-                <div class="info-value" id="speed">10</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">Level</div>
-                <div class="info-value" id="level">1</div>
-            </div>
-            <div class="info-item">
-                <div class="info-label">High Score</div>
-                <div class="info-value" id="highScore">0</div>
+        <div id="gameArea">
+            <div id="canvasContainer">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+                
+                <div id="pauseOverlay">
+                    <h2>⏸️ PAUSED</h2>
+                    <p>Press P to Resume</p>
+                </div>
+                
+                <div id="gameOverOverlay">
+                    <h2>💀 GAME OVER</h2>
+                    <p id="finalScore">Score: 0</p>
+                    <button class="overlay-button" onclick="restartGame()">🔄 Restart (R)</button>
+                    <button class="overlay-button secondary" onclick="quitGame()">❌ Quit (Q)</button>
+                </div>
             </div>
         </div>
         
-        <div id="controls">
-            <h3>🎮 Controls</h3>
-            <div class="control-group">
-                <strong>Movement:</strong> Arrow Keys or WASD
+        <div id="rightPanel">
+            <div id="gameInfo">
+                <div class="info-item">
+                    <div class="info-label">Score</div>
+                    <div class="info-value" id="score">0</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Speed</div>
+                    <div class="info-value" id="speed">10</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Level</div>
+                    <div class="info-value" id="level">1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">High Score</div>
+                    <div class="info-value" id="highScore">0</div>
+                </div>
             </div>
-            <div class="control-group">
-                <strong>Pause:</strong> P key
-            </div>
-            <div class="control-group">
-                <strong>Restart:</strong> R key (when game over)
-            </div>
-            <div class="control-group">
-                <strong>Quit:</strong> Q key (when game over)
+            
+            <div id="controls">
+                <h3>🎮 Controls</h3>
+                <div class="control-group">
+                    <strong>Movement:</strong> Arrow Keys or WASD
+                </div>
+                <div class="control-group">
+                    <strong>Pause:</strong> P key
+                </div>
+                <div class="control-group">
+                    <strong>Restart:</strong> R key (when game over)
+                </div>
+                <div class="control-group">
+                    <strong>Quit:</strong> Q key (when game over)
+                </div>
             </div>
         </div>
     </div>
